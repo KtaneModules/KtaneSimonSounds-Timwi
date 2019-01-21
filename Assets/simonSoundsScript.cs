@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using KModkit;
 using Random = UnityEngine.Random;
+using System.Text.RegularExpressions;
 
 public class simonSoundsScript : MonoBehaviour
 {
@@ -15,23 +16,17 @@ public class simonSoundsScript : MonoBehaviour
     int moduleId;
     private bool moduleSolved;
 
-    public KMSelectable SamBtnRed;
-    public KMSelectable SamBtnBlue;
-    public KMSelectable SamBtnYellow;
-    public KMSelectable SamBtnGreen;
-    public KMSelectable InBtnRed;
-    public KMSelectable InBtnBlue;
-    public KMSelectable InBtnYellow;
-    public KMSelectable InBtnGreen;
+    public KMSelectable[] SamBtns;
+    public KMSelectable[] InBtns;
+    public Light[] SamLights;
     public AudioClip[] Sounds;
 
-    private int[] selectedNumbers = new int[4] { 0, 0, 0, 0 };
+    public Material[] LedsOn;
+    public Material[] LedsOff;
+
+    private readonly int[] selectedNumbers = new int[4] { 0, 0, 0, 0 };
     private int lastInCon = -1;
     private int lastSamCon = -1;
-    private int red = 0;
-    private int blue = 0;
-    private int yellow = 0;
-    private int green = 0;
     private const int RedInput = 0;
     private const int BlueInput = 1;
     private const int YellowInput = 2;
@@ -40,7 +35,6 @@ public class simonSoundsScript : MonoBehaviour
     private int gameLength = 0;
     private List<int>[] stage;
     private int currentStage = 0;
-    private List<int> selectedIndices = new List<int>();
     private static readonly string[] colorNames = new[] { "red", "blue", "yellow", "green" };
     private static readonly int[][] table1 = new[]
     {
@@ -87,49 +81,90 @@ public class simonSoundsScript : MonoBehaviour
 
     void Awake()
     {
-
         moduleId = moduleIdCounter++;
 
-        SamBtnRed.OnInteract += delegate () { SamBtnPress(red); return false; };
-        SamBtnBlue.OnInteract += delegate () { SamBtnPress(blue); return false; };
-        SamBtnYellow.OnInteract += delegate () { SamBtnPress(yellow); return false; };
-        SamBtnGreen.OnInteract += delegate () { SamBtnPress(green); return false; };
-        InBtnRed.OnInteract += delegate () { InBtnPress("Input Button Red", RedInput); return false; };
-        InBtnBlue.OnInteract += delegate () { InBtnPress("Input Button Blue", BlueInput); return false; };
-        InBtnYellow.OnInteract += delegate () { InBtnPress("Input Button Yellow", YellowInput); return false; };
-        InBtnGreen.OnInteract += delegate () { InBtnPress("Input Button Green", GreenInput); return false; };
+        for (int i = 0; i < 4; i++)
+        {
+            SamBtns[i].OnInteract += SamBtnPress(i);
+            InBtns[i].OnInteract += InBtnPress(i);
+        }
+    }
+
+    private KMSelectable.OnInteractHandler InBtnPress(int btnPressed)
+    {
+        return delegate
+        {
+            if (moduleSolved)
+                return false;
+            Debug.LogFormat(@"[Simon Sounds #{0}] You pressed {1}", moduleId, colorNames[btnPressed]);
+            timesPressed += 1;
+            Match(btnPressed);
+            if (beep != null)
+                StopCoroutine(beep);
+            beep = StartCoroutine(Beep(delay: true));
+            return false;
+        };
+    }
+
+    private KMSelectable.OnInteractHandler SamBtnPress(int btnPressed)
+    {
+        return delegate ()
+        {
+            Audio.PlaySoundAtTransform(Sounds[selectedNumbers[btnPressed]].name, transform);
+            if (beep == null)
+                beep = StartCoroutine(Beep(delay: true));
+            StartCoroutine(BlinkLight(btnPressed));
+            return false;
+        };
+    }
+
+    private IEnumerator BlinkLight(int btnPressed)
+    {
+        SamBtns[btnPressed].GetComponent<MeshRenderer>().sharedMaterial = LedsOn[btnPressed];
+        SamLights[btnPressed].gameObject.SetActive(true);
+        yield return new WaitForSeconds(.3f);
+        SamBtns[btnPressed].GetComponent<MeshRenderer>().sharedMaterial = LedsOff[btnPressed];
+        SamLights[btnPressed].gameObject.SetActive(false);
+    }
+
+    private IEnumerator BlinkLights()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            SamLights[i].gameObject.SetActive(true);
+            SamBtns[i].GetComponent<MeshRenderer>().sharedMaterial = LedsOn[i];
+        }
+        yield return new WaitForSeconds(.3f);
+        for (int i = 0; i < 4; i++)
+        {
+            SamLights[i].gameObject.SetActive(false);
+            SamBtns[i].GetComponent<MeshRenderer>().sharedMaterial = LedsOff[i];
+        }
     }
 
     void Start()
     {
         BindSoundsToBtn();
         SetupOrder();
+        for (int i = 0; i < 4; i++)
+            SamBtns[i].GetComponent<MeshRenderer>().sharedMaterial = LedsOff[i];
     }
 
     void BindSoundsToBtn()
     {
+        var soundNumbers = Enumerable.Range(0, Sounds.Length).ToList();
+
         for (int i = 0; i < 4; i++)
         {
-            int index = UnityEngine.Random.Range(0, 12);
-            while (selectedIndices.Contains(index))
-            {
-                index = UnityEngine.Random.Range(0, 12);
-            }
-            selectedIndices.Add(index);
-            selectedNumbers[i] = index;
+            int index = Random.Range(0, soundNumbers.Count);
+            selectedNumbers[i] = soundNumbers[index];
+            soundNumbers.RemoveAt(index);
         }
-
-        selectedIndices.Clear();
-
-        red = selectedNumbers[0];
-        blue = selectedNumbers[1];
-        yellow = selectedNumbers[2];
-        green = selectedNumbers[3];
     }
 
     void SetupOrder()
     {
-        gameLength = UnityEngine.Random.Range(3, 6);
+        gameLength = Random.Range(3, 6);
 
         stage = new List<int>[gameLength];
 
@@ -143,7 +178,7 @@ public class simonSoundsScript : MonoBehaviour
             {
                 stage[i] = new List<int>();
             }
-            stage[i].Add(UnityEngine.Random.Range(0, 4));
+            stage[i].Add(Random.Range(0, 4));
             Debug.LogFormat(@"[Simon Sounds #{0}] In stage {1}, Simon played: {2}", moduleId, i + 1, string.Join(", ", stage[i].Select(num => colorNames[num]).ToArray()));
         }
     }
@@ -157,20 +192,9 @@ public class simonSoundsScript : MonoBehaviour
         {
             for (int i = 0; i <= currentStage; i++)
             {
-                int sound = stage[currentStage][i];
-
-                int soundLog = 0;
-                if (sound == 0)
-                    soundLog = red;
-                else if (sound == 1)
-                    soundLog = blue;
-                else if (sound == 2)
-                    soundLog = yellow;
-                else
-                    soundLog = green;
-
-                Audio.PlaySoundAtTransform(Sounds[soundLog].name, transform);
-                Debug.Log(soundLog);
+                Audio.PlaySoundAtTransform(Sounds[selectedNumbers[stage[currentStage][i]]].name, transform);
+                for (int j = 0; j < 4; j++)
+                    StartCoroutine(BlinkLights());
                 yield return new WaitForSeconds(.5f);
             }
 
@@ -178,33 +202,9 @@ public class simonSoundsScript : MonoBehaviour
         }
     }
 
-    void SamBtnPress(int btnPressed)
-    {
-        Audio.PlaySoundAtTransform(Sounds[btnPressed].name, transform);
-        Debug.Log(btnPressed);
-        if (beep == null)
-            beep = StartCoroutine(Beep(delay: true));
-    }
-
-    void InBtnPress(string logMessage, int btnPressed)
-    {
-        if (moduleSolved)
-            return;
-        Debug.Log(logMessage);
-        timesPressed += 1;
-        Match(btnPressed);
-        if (beep != null)
-            StopCoroutine(beep);
-        beep = StartCoroutine(Beep(delay: true));
-    }
-
     void CheckNextStage()
     {
-        if (timesPressed < currentStage)
-        {
-            return;
-        }
-        else
+        if (timesPressed >= currentStage)
         {
             currentStage++;
             if (currentStage > (gameLength - 1))
@@ -214,21 +214,22 @@ public class simonSoundsScript : MonoBehaviour
                 moduleSolved = true;
             }
             timesPressed = -1;
-            return;
         }
-
     }
-
 
     void Match(int btnPressed)
     {
+        Debug.LogFormat(@"[Simon Sounds #{0}] You pressed {1}", moduleId, colorNames[btnPressed]);
+
         int SimonsPress = stage[currentStage][timesPressed];
 
         var inCon = Enumerable.Range(0, inputConditions.Length).First(i => inputConditions[i].Eval(Bomb));
+        var anyChange = false;
         if (inCon != lastInCon)
         {
             Debug.LogFormat(@"[Simon Sounds #{0}] Input condition: {1}", moduleId, inputConditions[inCon].Explanation);
             lastInCon = inCon;
+            anyChange = true;
         }
         var playerInputColor = Array.IndexOf(table2[inCon], btnPressed);
         var samCon = Enumerable.Range(0, sampleConditions.Length).First(i => sampleConditions[i].Eval(Bomb));
@@ -236,34 +237,58 @@ public class simonSoundsScript : MonoBehaviour
         {
             Debug.LogFormat(@"[Simon Sounds #{0}] Sample condition: {1}", moduleId, sampleConditions[samCon].Explanation);
             lastSamCon = samCon;
+            anyChange = true;
+        }
+
+        if (anyChange)
+        {
+            Debug.LogFormat(@"[Simon Sounds #{0}] Expected button presses:", moduleId);
+            for (int st = currentStage; st < gameLength; st++)
+            {
+                Debug.LogFormat(@"[Simon Sounds #{0}] — Stage {1}: {2}", moduleId, st + 1, string.Join(", ", Enumerable.Range(0, st + 1).Select(i =>
+                {
+                    var sc = Enumerable.Range(0, sampleConditions.Length).First(j => sampleConditions[j].Eval(Bomb));
+                    var ic = Enumerable.Range(0, inputConditions.Length).First(j => inputConditions[j].Eval(Bomb));
+                    return colorNames[table2[ic][table1[sc][stage[st][i]]]];
+                }).ToArray()));
+            }
         }
 
         var inLogic = Array.IndexOf(table1[samCon], playerInputColor);
 
         if (inLogic == SimonsPress)
         {
-            int soundIn = 0;
-
-            if (inLogic == 0)
-                soundIn = red;
-            else if (inLogic == 1)
-                soundIn = blue;
-            else if (inLogic == 2)
-                soundIn = yellow;
-            else
-                soundIn = green;
-
             CheckNextStage();
-            Audio.PlaySoundAtTransform(Sounds[soundIn].name, transform);
-
+            Audio.PlaySoundAtTransform(Sounds[selectedNumbers[inLogic]].name, transform);
         }
         else
         {
             GetComponent<KMBombModule>().HandleStrike();
             timesPressed = -1;
         }
+    }
 
-        return;
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"!{0} sample B R G Y [play the sample buttons; B=blue, R=red, G=green, Y=yellow] | !{0} input B R G Y [press the input buttons]";
+#pragma warning restore 414
 
+    private List<KMSelectable> ProcessTwitchCommand(string command)
+    {
+        var list = new List<KMSelectable>();
+        Match m;
+        if ((m = Regex.Match(command, @"^\s*(?:(?<sample>sample|sam|listen|play|hear)|press|in|pr|submit|input)\s+(?<buttons>[BRGY ]+)\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).Success)
+        {
+            var buttons = m.Groups["buttons"].Value;
+            var isSampleButtons = m.Groups["sample"].Success;
+            var colors = "RBYG";
+            foreach (var ch in buttons.ToUpperInvariant())
+            {
+                var pos = colors.IndexOf(ch);
+                if (pos != -1)
+                    list.Add((isSampleButtons ? SamBtns : InBtns)[pos]);
+            }
+            return list;
+        }
+        return null;
     }
 }

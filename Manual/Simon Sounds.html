@@ -1,160 +1,129 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <meta charset="utf-8">
-        <title>Simon Listens — Keep Talking and Nobody Explodes Module</title>
-        <meta name="viewport" content="initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/normalize.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
-        <script src="js/highlighter.js"></script>
-        <script src="js/ruleseed.js"></script>
-        <style>
-            table {
-                margin: 1em auto;
-            }
-
-            /* Example CSS; Remove what is not used.*/
-            .bold {
-                font-weight: bold;
-            }
-            .underline {
-                text-decoration: underline;
-            }
-            .italics {
-                font-style: italic;
-            }
-
-            img.center {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            img.example-image {
-                width: 60%;
-            }
-        </style>
-        <style>
-            /* Remove this <style> block in final manual! */
-            code {background-color: rgb(235, 235, 200);}
-            code.notcode {background-color: white;}
-            li ol {margin: 0;}
-            kbd {background-color: #f5f5f5;border-style: solid;border-width: 1px 2px 2px 1px;padding: 0 1px;}
-        </style>
-    </head>
-    <body>
-        <div id="ManualContent">
-            <div class="section">
-                <div class="page page-bg-01">
-                    <div class="page-header">
-                        <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
-                        <span class="page-header-section-title">Simon Sounds</span>
-                    </div>
-                    <div class="page-content">
-                        <img src="img/Component/Module Name.svg" class="diagram">
-                        <h2>On the Subject of Simon Sounds</h2>
-                        <p class="flavour-text">Who is the manliest person? -Goofy 2019</p>
-                        
-                        <p>Simon Sounds is a version of the popular Simon Says game. In this Version you won`t see which button Simon pressed, but you will hear the sound this particular button generates.<br><br>On the Top of the module you will find 4 Sample Buttons. Press them to hear the sound they generate and figure out which button Simon pressed.<br><br><strong>REMEMBER:</strong> The Colours of the sample Buttons ASWELL as the input buttons are messed up!<br><br>Use the Tables below to determine which button generated which sound and which button to press!</p>
-
-                        <h3>Sample Buttons</h3>
-						<p>First valid condition applies</p>
-                        <table>
-                            <tr>
-                                <th>Condition</th>
-                                <th>RED</th>
-								<th>BLUE</th>
-								<th>YELLOW</th>
-								<th>GREEN</th>
-                            </tr>
-                            <tr>
-                                <th># of Port Plates > 3</th>
-                                <td>BLUE</td>
-								<td>YELLOW</td>
-								<td>GREEN</td>
-								<td>RED</td>
-                            </tr>
-                            <tr>
-                                <th># of AA-Batteries > # of D-Batteries</th>
-                                <td>RED</td>
-								<td>YELLOW</td>
-								<td>BLUE</td>
-								<td>GREEN</td>
-                            </tr>
-                            <tr>
-                                <th>SN contains a Vowel and an even #</th>
-                                <td>GREEN</td>
-								<td>RED</td>
-								<td>YELLOW</td>
-								<td>BLUE</td>
-                            </tr>
-                            <tr>
-                                <th># of Lit Indicators = # of Total Ports</th>
-                                <td>YELLOW</td>
-								<td>GREEN</td>
-								<td>RED</td>
-								<td>BLUE</td>
-                            </tr>
-							<tr>
-                                <th>Otherwise</th>
-                                <td>GREEN</td>
-								<td>BLUE</td>
-								<td>RED</td>
-								<td>YELLOW</td>
-                            </tr>
-                        </table>
-						<h3>Input Buttons</h3>
-						<p>First valid condition applies</p>
-                        <table>
-                            <tr>
-                                <th>Condition</th>
-                                <th>RED</th>
-								<th>BLUE</th>
-								<th>YELLOW</th>
-								<th>GREEN</th>
-                            </tr>
-                            <tr>
-                                <th># of solved Modules > # of unsolved Modules</th>
-                                <td>BLUE</td>
-								<td>GREEN</td>
-								<td>RED</td>
-								<td>YELLOW</td>
-                            </tr>
-                            <tr>
-                                <th># of Battery Holders + # of Port Plates + Last # in SN < 10</th>
-                                <td>YELLOW</td>
-								<td>BLUE</td>
-								<td>RED</td>
-								<td>GREEN</td>
-                            </tr>
-                            <tr>
-                                <th>Serial and Parallel Port are present</th>
-                                <td>RED</td>
-								<td>GREEN</td>
-								<td>BLUE</td>
-								<td>YELLOW</td>
-                            </tr>
-                            <tr>
-                                <th>Lit BOB or unlit NSA</th>
-                                <td>GREEN</td>
-								<td>YELLOW</td>
-								<td>BLUE</td>
-								<td>RED</td>
-                            </tr>
-							<tr>
-                                <th>Otherwise</th>
-                                <td>YELLOW</td>
-								<td>RED</td>
-								<td>GREEN</td>
-								<td>BLUE</td>
-                            </tr>
-                        </table>
-                        
-                    </div>
-                   <div class="page-footer relative-footer">Page 1 of 1</div>
-                </div>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Simon Sounds — Keep Talking and Nobody Explodes Module</title>
+    <meta name="viewport" content="initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+    <script src="js/highlighter.js"></script>
+    <style>
+        table {
+            margin: 1em auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <div class="page page-bg-01">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">Simon Sounds</span>
             </div>
+            <div class="page-content">
+                <img src="img/Component/Simon Sounds.svg" class="diagram">
+                <h2>On the Subject of Simon Sounds</h2>
+                <p class="flavour-text">Who is the manliest person? —Goofy 2019</p>
+                <p>Simon Sounds is a version of the popular Simon Says game. In this version you won’t see which button Simon pressed, but you will hear the sound this particular button generates.</p>
+                <p>On the top of the module you will find 4 <em>sample buttons</em>. Press them to hear the sound they generate and figure out which button Simon pressed.</p>
+                <p><strong>REMEMBER:</strong> The colours of the sample buttons <em>as well</em> as the input buttons are messed up! Use the tables below to determine which button generated which sound and which button to press.</p>
+                <h3>Sample buttons</h3>
+                <p>First valid condition applies.</p>
+                <table>
+                    <tr>
+                        <th>Condition</th>
+                        <th>RED</th>
+                        <th>BLUE</th>
+                        <th>YELLOW</th>
+                        <th>GREEN</th>
+                    </tr>
+                    <tr>
+                        <th># of port plates &gt; 3</th>
+                        <td>BLUE</td>
+                        <td>YELLOW</td>
+                        <td>GREEN</td>
+                        <td>RED</td>
+                    </tr>
+                    <tr>
+                        <th># of AA batteries &gt; # of D batteries</th>
+                        <td>RED</td>
+                        <td>YELLOW</td>
+                        <td>BLUE</td>
+                        <td>GREEN</td>
+                    </tr>
+                    <tr>
+                        <th>SN contains a vowel and an even digit</th>
+                        <td>GREEN</td>
+                        <td>RED</td>
+                        <td>YELLOW</td>
+                        <td>BLUE</td>
+                    </tr>
+                    <tr>
+                        <th># of lit indicators = # of ports</th>
+                        <td>YELLOW</td>
+                        <td>GREEN</td>
+                        <td>RED</td>
+                        <td>BLUE</td>
+                    </tr>
+                    <tr>
+                        <th>Otherwise</th>
+                        <td>GREEN</td>
+                        <td>BLUE</td>
+                        <td>RED</td>
+                        <td>YELLOW</td>
+                    </tr>
+                </table>
+                <h3>Input Buttons</h3>
+                <p>First valid condition applies.</p>
+                <table>
+                    <tr>
+                        <th>Condition</th>
+                        <th>RED</th>
+                        <th>BLUE</th>
+                        <th>YELLOW</th>
+                        <th>GREEN</th>
+                    </tr>
+                    <tr>
+                        <th># of solved modules &gt; # of unsolved modules</th>
+                        <td>BLUE</td>
+                        <td>GREEN</td>
+                        <td>RED</td>
+                        <td>YELLOW</td>
+                    </tr>
+                    <tr>
+                        <th># of battery holders + # of port plates + last digit in SN &lt; 10</th>
+                        <td>YELLOW</td>
+                        <td>BLUE</td>
+                        <td>RED</td>
+                        <td>GREEN</td>
+                    </tr>
+                    <tr>
+                        <th>Serial and parallel ports are present</th>
+                        <td>RED</td>
+                        <td>GREEN</td>
+                        <td>BLUE</td>
+                        <td>YELLOW</td>
+                    </tr>
+                    <tr>
+                        <th>Lit BOB or unlit NSA</th>
+                        <td>GREEN</td>
+                        <td>YELLOW</td>
+                        <td>BLUE</td>
+                        <td>RED</td>
+                    </tr>
+                    <tr>
+                        <th>Otherwise</th>
+                        <td>YELLOW</td>
+                        <td>RED</td>
+                        <td>GREEN</td>
+                        <td>BLUE</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="page-footer relative-footer">Page 1 of 1</div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
