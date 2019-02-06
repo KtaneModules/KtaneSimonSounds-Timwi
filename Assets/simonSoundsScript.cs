@@ -94,6 +94,7 @@ public class simonSoundsScript : MonoBehaviour
     {
         return delegate
         {
+            InBtns[btnPressed].AddInteractionPunch();
             if (moduleSolved)
                 return false;
             InBtns[btnPressed].AddInteractionPunch();
@@ -114,6 +115,7 @@ public class simonSoundsScript : MonoBehaviour
         {
             SamBtns[btnPressed].AddInteractionPunch();
             Audio.PlaySoundAtTransform(Sounds[selectedNumbers[btnPressed]].name, transform);
+            SamBtns[btnPressed].AddInteractionPunch(.5f);
             if (beep == null)
                 beep = StartCoroutine(Beep(delay: true));
             StartCoroutine(BlinkLight(btnPressed));
