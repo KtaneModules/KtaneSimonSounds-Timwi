@@ -13,13 +13,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: simonSounds
   title: Simon Sounds
-  description: "Simon Sounds is a version of the popular Simon Says game. In this
-    version you won\u2019t see which button Simon pressed, but you will hear the sound
-    this particular button generates.\n\nOn the top of the module you will find 4
-    sample buttons. Press them to hear the sound they generate and figure out which
-    button Simon pressed.\n\nREMEMBER: The colours of the sample buttons AS WELL as
-    the input buttons are messed up! \n\nCreated by Goofy in collaboration with Timwi\n\n[url=http://ktane.timwi.de/PDF/Simon%20Sounds.pdf]Manual
-    PDF[/url]\n[url=http://ktane.timwi.de/HTML/Simon%20Sounds.html]Manual HTML[/url]"
+  author: 
+  description: "This is a [b]re-upload[/b] of Goofy\u2019s module. Please [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1630803569]unsubscribe
+    from the old version[/url].\n\nSimon Sounds is a version of the popular Simon
+    Says game. In this version you won\u2019t see which button Simon pressed, but
+    you will hear the sound this particular button generates.\r\n\r\nOn the top of
+    the module you will find 4 sample buttons. Press them to hear the sound they generate
+    and figure out which button Simon pressed.\r\n\r\nREMEMBER: The colours of the
+    sample buttons AS WELL as the input buttons are messed up! \r\n\r\nCreated by
+    Goofy\r\n\nmoduleID: simonSounds\n\nManual HTML: https://ktane.timwi.de/HTML/Simon%20Sounds.html\nManual
+    PDF: https://ktane.timwi.de/PDF/Simon%20Sounds.pdf"
   version: 1
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 4d7816ea6eb192c49aa14dfee761c4e8, type: 3}

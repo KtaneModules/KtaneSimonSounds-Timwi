@@ -17812,20 +17812,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -17862,20 +17848,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -17912,20 +17884,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -17962,20 +17920,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -19845,26 +19789,14 @@ MonoBehaviour:
   TwoFactorWidget: {fileID: 114885870854110436}
   CustomWidget: {fileID: 114213089377510072}
   HighlightPrefab: {fileID: 100000, guid: d78a484c6e87f1b47b6596ac080fe942, type: 2}
-  AudioVolume: 1
-  AudioClips:
-  - {fileID: 8300000, guid: a57d957e5ae85074f9057641d4d0ed6b, type: 3}
-  - {fileID: 8300000, guid: 49e6d0fa9aafb964cb97fd3e93a31e09, type: 3}
-  - {fileID: 8300000, guid: 5ea01560da3a07b4f81e550489b3e0ab, type: 3}
-  - {fileID: 8300000, guid: 99b6d0de68feb3d4ca4018efc4c0e669, type: 3}
-  - {fileID: 8300000, guid: e41b6a9306427374696e78a16c402405, type: 3}
-  - {fileID: 8300000, guid: 4b86952b2db1edc4b8478206eb2cd238, type: 3}
-  - {fileID: 8300000, guid: 186c71f799ce7fc44aa75dbb422d911f, type: 3}
-  - {fileID: 8300000, guid: 0830c8732195b5a479b6be3093b66e96, type: 3}
-  - {fileID: 8300000, guid: 36e0cd1aa6969a2479263849ef9fa458, type: 3}
-  - {fileID: 8300000, guid: 8cfa2609900d1b74fb23e6d200e8f306, type: 3}
-  - {fileID: 8300000, guid: 6d3f170ff5665e14881b47825bf5cfb1, type: 3}
-  - {fileID: 8300000, guid: d2b686813c97a6b4bb246a2304382aff, type: 3}
+  AudioVolume: 0.25
+  AudioClips: []
   StrikeCount: 3
   TimeLimit: 600
   BombSize: 1
   FrontFaceOnly: 1
   EdgeworkConfiguration: {fileID: 0}
-  TwitchPlaysActive: 0
+  TwitchPlaysActive: 1
   TwitchPlaysMode: 0
   turnSpeed: 128
   panSpeed: 4
